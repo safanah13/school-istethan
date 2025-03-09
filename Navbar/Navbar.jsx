@@ -1,28 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar() {
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <div className="logo">
-          <a href="/">نظام الاستعاضة المدرسي</a>
+      <div className="nav-container">
+        <Link to="/" className="nav-logo">
+          اسم الموقع
+        </Link>
+
+        {/* زر القائمة للموبايل */}
+        <div className="menu-icon" onClick={toggleMenu}>
+          <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
         </div>
-        <ul className="nav-menu">
+
+        {/* روابط القائمة */}
+        <ul className={isOpen ? 'nav-menu active' : 'nav-menu'}>
           <li className="nav-item">
-            <a href="/" className="nav-link">الرئيسية</a>
+            <Link to="/" className="nav-link" onClick={toggleMenu}>
+              الرئيسية
+            </Link>
           </li>
           <li className="nav-item">
-            <a href="/about" className="nav-link">من نحن</a>
+            <Link to="/about" className="nav-link" onClick={toggleMenu}>
+              من نحن
+            </Link>
           </li>
           <li className="nav-item">
-            <a href="/contact" className="nav-link">اتصل بنا</a>
+            <Link to="/contact" className="nav-link" onClick={toggleMenu}>
+              اتصل بنا
+            </Link>
           </li>
         </ul>
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
-
