@@ -1,23 +1,43 @@
+// الاستيرادات الضرورية
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Navbar from './Navbar';
 
-const App = () => {
+// استيراد الصفحات
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/Contact';
+
+// استيراد المكونات
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+function App() {
   return (
-    <Router>
-      <div className="App">
+    <div className="app">
+      <BrowserRouter>
+        {/* شريط التنقل سيظهر في جميع الصفحات */}
         <Navbar />
-        <Routes>
-          <Route path="/" element={
-            <div className="content">
-              <h1>نظام الاستعاضة المدرسي</h1>
-              <p>نظام متكامل لإدارة الاستعاضة في المدارس</p>
-            </div>
-          } />
-        </Routes>
-      </div>
-    </Router>
+        
+        {/* المحتوى الرئيسي */}
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* يمكن إضافة مسار 404 للصفحات غير الموجودة */}
+            <Route path="*" element={
+              <div className="not-found">
+                <h2>404 - الصفحة غير موجودة</h2>
+              </div>
+            } />
+          </Routes>
+        </main>
+
+        {/* تذييل الصفحة سيظهر في جميع الصفحات */}
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 }
 
