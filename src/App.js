@@ -1,21 +1,23 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './Navbar';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Navbar />
-      <header className="App-header">
-        <h1>مرحباً بكم في نظام الاستعاضة المدرسي</h1>
-        <p>
-          نظام إدارة الاستعاضة للمدارس
-        </p>
-        <button className="login-button">
-          تسجيل الدخول
-        </button>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
+            <div className="content">
+              <h1>نظام الاستعاضة المدرسي</h1>
+              <p>نظام متكامل لإدارة الاستعاضة في المدارس</p>
+            </div>
+          } />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
